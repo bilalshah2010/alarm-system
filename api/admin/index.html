@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>All Feeds</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&subset=latin-ext">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
+    <script src="js/vue.js" type="text/javascript"></script>
+    <script src="js/axios.min.js" type="text/javascript"></script>
+    <script src="/js/socket.io.js" type="text/javascript"></script>
+    </head>
+<body>
+<div class="container">
+    <div id="app">
+        <table>
+            <thead>
+            <th>Feed Id</th>
+            <th>Camera Id</th>
+            <th>Company Name</th>
+            <th>Message</th>
+            <th>Response</th>
+            <th>Processing Time</th>
+            <th>Feed date</th>
+            </thead>
+            <tbody>
+            <tr v-for="(feed,index) in feeds" v-bind:class="{socket_feed : feed.new && highlight}">
+                <td>{{feed.id}}</td>
+                <td>{{feed.camera_id}}</td>
+                <td>{{feed.name}}</td>
+                <td>{{feed.message}}</td>
+                <td class="state" v-bind:class="{false_alarm : !feed.state}">{{feed.state ? "True Alarm" : "False Alarm"}}</td>
+                <td>{{feed.time / 1000}}s</td>
+                <td>{{new Date(feed.createdAt).toLocaleString()}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            highlight: false,
+            feeds: [],
+            apiURL: 'http://localhost:9000/api/v1/admin/feeds',
+            socketURL: 'ws://localhost:9000'
+        },
+        mounted () {
+            axios.get(this.apiURL)
+                .then((response) => {
+                    this.feeds = response.data;
+                });
+            const socket = io(this.socketURL);
+            socket.on("connect", () => {
+                console.log("Listening to socket at port 9000");
+                socket.on("FEED_INSERTED", feed => {
+                    setTimeout(()=>{
+                        feed.new = true;
+                        this.feeds.unshift(feed);
+                        this.highlight = true;
+                        setTimeout(()=>{
+                            this.highlight = false;
+                            feed.new = false;
+                        },5000);
+                    },1000);
+                });
+            });
+            socket.on("disconnect", () => {
+                console.log("Socket disconnected");
+            });
+        }
+    })
+</script>
+</body>
+</html>

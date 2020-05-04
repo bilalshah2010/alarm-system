@@ -1,0 +1,28 @@
+.companies {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .company {
+    max-width: $company-card-width;
+    margin: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid $color-light-dark;
+
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      color: $paragraph-color;
+      line-height: 26px;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}

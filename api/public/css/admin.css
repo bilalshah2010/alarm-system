@@ -1,0 +1,45 @@
+body {
+    background-color: #f9f9f9;
+    font-family: 'Lato';
+}
+* {
+    box-sizing: border-box;
+}
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+}
+table{
+    width: 100%;
+    border-spacing: 0 10px;
+}
+th,td {
+    text-align: center;
+    font-size: 13px;
+    padding: 10px;
+    transition: all 0.5s ease-in-out;
+}
+th{
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+tbody tr {
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.1);
+}
+td{
+    color: #555;
+    background-color: #f7f7f7;
+}
+.state {
+    color: red;
+    font-weight: 700;
+}
+.state.false_alarm {
+    color: green;
+}
+tr.socket_feed > td {
+    background-color: #515253;
+    color: white !important;
+}

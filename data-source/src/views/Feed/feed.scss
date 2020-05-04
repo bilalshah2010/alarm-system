@@ -1,0 +1,74 @@
+.company-title {
+  font-size: $big-font-size;
+  font-weight: $normal;
+  text-transform: uppercase;
+  color: $color-extra-dark;
+}
+
+.back {
+  margin-left: 20px;
+  font-size: 14px;
+  vertical-align: bottom;
+}
+
+.station-title {
+  font-weight: 300;
+  color: #515253;
+}
+
+.camera-stations {
+  .grid-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px;
+
+    > * {
+      flex: 25%;
+      max-width: 25%;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+  }
+}
+
+.monitoring-system {
+  display: flex;
+  flex-wrap: wrap;
+
+  > .camera-station {
+    flex: 50%;
+    max-width: 50%;
+
+    &:nth-child(odd) {
+      padding-right: 2em;
+    }
+
+    &:nth-child(even) {
+      padding-left: 2em;
+    }
+
+    .camera {
+      flex: 50%;
+      max-width: 50%;
+      padding: 10px;
+    }
+  }
+
+  .grid-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+}
+
+.feed-response {
+  > div.false-alarm {
+    @include success-message;
+  }
+
+  > div:not(.false-alarm) {
+    @include danger-message;
+  }
+}

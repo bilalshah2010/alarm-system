@@ -1,0 +1,10 @@
+{
+  "calipsa": {
+    "username" : "calipsa",
+    "password": "1234@5678"
+  },
+  "branchStore": {
+    "username": "1 branch store",
+    "password": "abcd@efgh"
+  }
+}

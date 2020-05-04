@@ -1,0 +1,27 @@
+version: '2'
+services:
+  web-app:
+    build:
+      context: ./data-source
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./data-source:/app
+    ports:
+      - '8080:8080'
+    restart: on-failure
+    container_name: web-app
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - '9000:9000'
+    restart: on-failure
+    container_name: api
+    volumes:
+      - /node_modules
+      - ./api:/app
+    env_file:
+      - ./api/.env
+

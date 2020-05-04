@@ -1,0 +1,25 @@
+//Font Weights
+$normal: 400;
+$bold:600;
+
+//Font Size
+$excel-font-size: 48px;
+$h1-font-size: 28px;
+$big-font-size: 34px;
+
+//Constants
+$nav-height: 60px;
+$body-height: calc(100vh - #{$nav-height});
+$company-card-width:450px;
+
+//THEME
+$color-extra-light: #f0f0f0;
+$color-light-dark: #ddd;
+$color-dark: #515253;
+$color-white: #fff;
+$paragraph-color: #8e8e8e;
+$color-extra-dark: #333;
+
+//Colors
+$app-bg : $color-extra-light;
+$nav-bg : $color-dark;

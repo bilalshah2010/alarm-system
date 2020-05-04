@@ -1,0 +1,13 @@
+nav {
+  background: $nav-bg;
+  height: $nav-height;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+
+  h1 {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 18px;
+  }
+}
