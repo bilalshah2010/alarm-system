@@ -72,24 +72,34 @@ Let's have a detail look into the source code of above.
 ## API
 
 **Routes** - There are three type of routes. `Admin Routes` - for Admin dashboard  `Public Routes` - for Auth  and `Private Routes` for feed analyzing. These are defined in `config/routes.js`and are mapped with the controllers defined in `src/controllers`.
+
 **Logs** - Combining `winston` and `morgan` for creating the stream of logs into the logs folder with `app.log` and `error.log` . Queries and API's request , response continuously gets saved there which helps a lot for debugging.
+
 **Socket IO** - For live communication between server and socket based clients. Configurations and events handling can be found in `config/socket.js`. 
+
 **CORS** - For Allowing Cross-Origin resource sharing.
+
 **Middleware** - `jwtAuth` defined in `config/auth.js` for validating the token from every incoming requests instead of doing it in every controller function. This middleware only filters the private routes.
+
 **Helmet** - For erasing any server info from the response headers. This helps in increasing security.
+
 **Models** - The `src/models` folder contains all the database table models and structure.
+
 **Migrations** - The `src/models` folder contains all the migrations required for creating the database schema.
+
 **Seeders** -   The `src/models` folder contains all the seeders required for inserting the assumed data.
+
  **Utils** -  The `src`  folder has the util file which contains functions that are likely to be used in overall app like logging sorting or some calculations. Also used for the prototyping.
+ 
  **Assosiations** -  The assosiations for the table models are defined as.
-```mermaid
-graph LR
-A[USER] -- Has Many -->  B[STATION]
-B[STATION] -- Belongs To --> A[USER]
-A[USER] -- Has Many -->  C[CAMERAS]
-C[CAMERAS] -- Belongs To --> A[USER]
-B[STATION] -- Has Many -->  C[CAMERAS]
-C[CAMERAS] -- Belongs To --> B[STATION,s]
+ 
+```
+[USER] --      Has Many   -->   [STATION's] (Weak  assosiation)
+[STATION's] -- Belongs To -->   [USER]
+[USER] --      Has Many   -->   [CAMERAS]
+[CAMERAS] --   Belongs To -->   [USER]
+[STATION] --   Has Many   -->   [CAMERAS]
+[CAMERAS] --   Belongs To -->   [STATION's]
 ```
 
 ## Admin
@@ -107,7 +117,11 @@ It is a vuejs application located at `api/admin` folder. It's purpose is to show
  7. NotFound - For 404 erros.
  
 **Styles** - `/src/styles/_variables.scss` and `/src/styles/_mixins.scss` are automatically injected to every components so they are accessible everywhere using css loaderOptions. `/src/styles/_app.scss` is being used for the global styling.
+
 **Tests** - A basic unit test is provided with every component as `*.spec.ts` . Jest configurations can be found in `jest.config .js`.
+
 **Interceptors** - For adding jwt token to every request automatically if token exists in store. Global error handling for 404 , 401 and 500 and routing to appropriate component.
+
 **login.config** - The file is located into root and contain the login information for assumed companies. Change the credentials in this file to see the 401 handling.
+
 > Note: This file is copied separately in docker so you don't need to rebuild the image after changing this file.

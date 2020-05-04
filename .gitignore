@@ -1,0 +1,10 @@
+api/node_modules
+api/logs
+api/database/database.sqlite3
+api/.env
+
+.idea
+
+data-source/node_modules
+data-source/.env.development
+data-source/.env.production
